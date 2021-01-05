@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+    body    
+        h1 
+            a(href='/topic') Server Side Javascrript 
+        ul
+            each topic in topics
+                li
+                    a(href='/topic/'+topic)= topic.cname
+        article
+            h1= 'Delete ?' +topic.cname
+            form(action="/topic/"+topic.rindex+'/delete' method='post')
+                p
+                    input(type="submit" value='yes')
+            a(href="/topic/"+topic.rindex) No
+                    
