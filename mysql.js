@@ -38,6 +38,13 @@ app.post("/upload", upload.single("userfile"), (req, res) => {
   res.send("Uploaded : " + req.file.filename);
 });
 
+
+app.get("/topic/add", (req, res) => {
+  let sql = "select * from review";
+  conn.query(sql, (err, topics, fields) => {
+    res.render("add", { topics: topics });
+  });
+});
 app.post("/topic/add", (req, res) => {
   const cname = req.body.cname;
   const postingname = req.body.postingname;
@@ -73,7 +80,6 @@ app.get("/topic/:id/edit", (req, res) => {
     }
   });
 });
-
 app.post("/topic/:id/edit", (req, res) => {
   const cname = req.body.cname;
   const postingname = req.body.postingname;
@@ -89,12 +95,7 @@ app.post("/topic/:id/edit", (req, res) => {
   });
 });
 
-app.get("/topic/add", (req, res) => {
-  let sql = "select * from review";
-  conn.query(sql, (err, topics, fields) => {
-    res.render("add", { topics: topics });
-  });
-});
+
 
 app.get(["/topic", "/topic/:id"], (req, res) => {
   let sql = "select * from review";
